@@ -4,9 +4,7 @@ import pandas as pd
 indices = ["The Pacific", "Black Mirror", "CSI", "NCSI", "Lost"]
 colunas = ["Nota", "Temporadas", "Episódios"]
 dados = [[8.3,1,10],[8.3,6,27],[7.7,15,337],[6.9,14,458],[8.3,6,525]]
-
 df = pd.DataFrame(dados,index=indices,columns=colunas)
-
 print(df, end="\n\n")
 
 print("############# Seleção ##############")
@@ -57,3 +55,33 @@ print(df[df["Nota"]>8]["Temporadas"], end="\n\n")
 print(df[df["Nota"]>8][["Temporadas", "Episódios"]], end="\n\n")
 
 print(df[(df["Nota"]>8) & (df["Temporadas"]>3)])
+
+plataforma = ["HBO", "HBO", "Netflix", "Netflix"]
+lancamento = [2020, 2021, 2020, 2021]
+indices = pd.MultiIndex.from_arrays([plataforma, lancamento], names=("Plataforma", "Lançamento"))
+print("\n\nIndices: ")
+print(indices)
+
+print("\nSem Índice: ")
+df.reset_index(inplace=True)
+print(df)
+
+print("\nRenomear Índice: ")
+df.rename(columns={"index":"Nome"}, inplace=True)
+print(df)
+
+print("\nConfigurar Índice: ")
+df.set_index(indices, inplace=True)
+print(df)
+
+print("\nSeleção Multi-Índex: ")
+print(df.loc["HBO"].loc[2021])
+
+print("\nCross Selection 1: ")
+print(df.xs("HBO"))
+
+print("\nCross Selection 2: ")
+print(df.xs(("HBO", 2020)))
+
+print("\nCross Selection 3: ")
+print(df.xs(2020, level="Lançamento"))
