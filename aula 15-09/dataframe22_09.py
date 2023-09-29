@@ -85,3 +85,80 @@ print(df.xs(("HBO", 2020)))
 
 print("\nCross Selection 3: ")
 print(df.xs(2020, level="Lançamento"))
+
+print("\n\n\n########### Operações ###########")
+
+print("Unique", df["Nota"].unique()) #mostra as notas unicas
+print("nUnique", df["Nota"].nunique()) #numero de notas unicas
+print("Count", df["Nota"].count()) #numero de notas
+
+df.at[("HBO", 2020), "Nota"] = 8.7 #muda a nota específica
+
+print("Unique", df["Nota"].unique()) #mostra as notas unicas
+print("nUnique", df["Nota"].nunique()) #numero de notas unicas
+print("Count", df["Nota"].count()) #numero de notas
+print("Value Counts", df["Nota"].value_counts(), sep="") #numero de ocorrencia de cada nota
+
+print("\n\n\n########### Operações Agregadas ###########")
+
+print("Min: ", df["Nota"].min())
+print("Max: ", df["Nota"].max())
+print("Median: ", df["Nota"].median())
+print("Var: ", df["Nota"].var())
+
+print("\n\n\n########### Drop & Fill ###########")
+
+indices = ["Aluno 1", "Aluno 2", "Aluno 3"]
+colunas = ["Nome", "Altura", "Sono Médio"]
+dados = [["Giovanna Grossi", 173, 7], ["Uriel Liann", 180, np.nan], ["Pedro Tokar", 182, 6]]
+df = pd.DataFrame(dados, index=indices, columns=colunas)
+print(df)
+
+print("Is Null:", df.isnull(), sep="\n") #mostra celulas sem valores
+print("\nIs Null:", df["Sono Médio"].isnull(), sep="\n")
+
+print("\nNull:", df[df.isnull()], sep="\n") #nada a ve
+print("\nNull:", df[df["Sono Médio"].isnull()], sep="\n") #printa o index que tem registro sem valor
+
+
+df.dropna(thresh=2, inplace=True) #até 2 NaN, não apaga a linha
+print(df)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
